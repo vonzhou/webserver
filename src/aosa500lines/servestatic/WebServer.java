@@ -16,9 +16,12 @@ class RequestHandler extends AbstractHandler{
 	public void handle(String target, Request baseRequest, HttpServletRequest request,
 			HttpServletResponse reponse) throws IOException, ServletException {
 		// current work directory
-		String cwd = System.getProperty("user.dir");
-		String path = request.getPathInfo();
+		String base = System.getProperty("user.dir");
+		String requestPath = request.getPathInfo();
+		int index = requestPath.indexOf('/');
 		
+		requestPath = requestPath.substring(index);
+		System.out.println(requestPath);
 		/*
 		File currentDirectory = new File(".");
 		System.out.println(currentDirectory.getCanonicalPath());
@@ -28,8 +31,8 @@ class RequestHandler extends AbstractHandler{
 		reponse.setStatus(HttpServletResponse.SC_OK);
 		baseRequest.setHandled(true);
 		
-		reponse.getWriter().println("<h1><font color=red>"+path+"<font></h1>");
-		reponse.getWriter().println("<h1><font color=red>"+cwd+"<font></h1>");
+		reponse.getWriter().println("<h1><font color=red>"+requestPath+"<font></h1>");
+		reponse.getWriter().println("<h1><font color=red>"+base+"<font></h1>");
 		
 	}
 	
